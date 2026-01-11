@@ -1,0 +1,25 @@
+name: CI-CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Build Gateway
+        run: docker build -t pedidos-veloz-gateway ./gateway
+
+      - name: Build Orders
+        run: docker build -t pedidos-veloz-orders ./orders
+
+      - name: Build Stock
+        run: docker build -t pedidos-veloz-stock ./stock
+
+      - name: Teste simples
+        run: echo "Build concluído com sucesso!"
