@@ -1,4 +1,4 @@
-name: CI-CD Pipeline
+name: CI-CD
 
 on:
   push:
@@ -9,33 +9,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout código
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v3
 
-      #Etapa de Build
-      - name: Build Gateway
-        run: docker build -t pedidos-veloz-gateway:v1 ./gateway
+      - name: Build Docker Images
+        run: |
+          docker build -t pedidos-veloz-gateway:v1 ./gateway
+          docker build -t pedidos-veloz-orders:v1 ./orders
+          docker build -t pedidos-veloz-stock:v1 ./stock
 
-      - name: Build Orders
-        run: docker build -t pedidos-veloz-orders:v1 ./orders
+      - name: Basic Lint Check
+        run: echo "Lint placeholder OK"
 
-      - name: Build Stock
-        run: docker build -t pedidos-veloz-stock:v1 ./stock
+      - name: Image Scan (simulado)
+        run: echo "Security scan placeholder OK"
 
-      #Etapa de Testes (simulado)
-      - name: Executar testes
-        run: echo "Testes executados com sucesso"
-
-      #Uso de Secret no Pipeline (simulado)
-      - name: Usando secret do GitHub
-        env:
-          DOCKER_USER: ${{ secrets.DOCKER_USER }}
-        run: echo "Usuário secreto carregado com sucesso"
-
-      #Etapa de Publicação de imagem (simulado)
-      - name: Publicar imagens
+      - name: Publish images (simulado)
         run: echo "Imagens publicadas em registry (simulação)"
-
-      #Validação final
-      - name: Pipeline concluído
-        run: echo "CI/CD executado com sucesso"
