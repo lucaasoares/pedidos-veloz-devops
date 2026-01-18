@@ -12,14 +12,30 @@ jobs:
       - name: Checkout código
         uses: actions/checkout@v4
 
+      #Etapa de Build
       - name: Build Gateway
-        run: docker build -t pedidos-veloz-gateway ./gateway
+        run: docker build -t pedidos-veloz-gateway:v1 ./gateway
 
       - name: Build Orders
-        run: docker build -t pedidos-veloz-orders ./orders
+        run: docker build -t pedidos-veloz-orders:v1 ./orders
 
       - name: Build Stock
-        run: docker build -t pedidos-veloz-stock ./stock
+        run: docker build -t pedidos-veloz-stock:v1 ./stock
 
-      - name: Teste simples
-        run: echo "Build concluído com sucesso!"
+      #Etapa de Testes (simulado)
+      - name: Executar testes
+        run: echo "Testes executados com sucesso"
+
+      #Uso de Secret no Pipeline (simulado)
+      - name: Usando secret do GitHub
+        env:
+          DOCKER_USER: ${{ secrets.DOCKER_USER }}
+        run: echo "Usuário secreto carregado com sucesso"
+
+      #Etapa de Publicação de imagem (simulado)
+      - name: Publicar imagens
+        run: echo "Imagens publicadas em registry (simulação)"
+
+      #Validação final
+      - name: Pipeline concluído
+        run: echo "CI/CD executado com sucesso"
