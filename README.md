@@ -24,7 +24,7 @@ kubectl get pods
 Pipeline configurado via GitHub Actions no arquivo:
 .github/workflows/ci-cd.yaml
 
-## Observabilidade
+## Observabilidade 1
 
 Proposta de uso de Prometheus (métricas), Loki (logs) e Jaeger (tracing).
 
@@ -35,3 +35,13 @@ Rolling Update via Kubernetes Deployments.
 ## Escalabilidade
 
 Possível uso de Horizontal Pod Autoscaler (HPA) baseado em CPU.
+
+## Infraestrutura como Código (Terraform)
+
+A pasta `terraform/` contém um esqueleto Terraform demonstrando como a infraestrutura Kubernetes poderia ser reproduzida como código em ambiente real.
+
+## Observabilidade 2
+
+Logs são emitidos via stdout dos containers e coletados pelo Kubernetes.
+Métricas podem ser obtidas via Metrics Server.
+Tracing distribuído é proposto com OpenTelemetry + Jaeger.
