@@ -7,4 +7,3 @@ spec:
     app: stock
   ports:
     - port: 3001
-      targetPort: 3001

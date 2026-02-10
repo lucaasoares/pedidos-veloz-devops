@@ -13,8 +13,10 @@ spec:
         app: stock
     spec:
       containers:
-      - name: stock
-        image: pedidos-veloz-stock:latest
-        imagePullPolicy: Never
-        ports:
-        - containerPort: 3001
+        - name: stock
+          image: pedidos-veloz-stock:v1
+          env:
+            - name: DATABASE_URL
+              value: postgres://postgres:postgres@postgres-service:5432/stock
+          ports:
+            - containerPort: 3001

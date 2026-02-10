@@ -3,6 +3,7 @@ version: "3.9"
 services:
   gateway:
     build: ./gateway
+    image: pedidos-veloz-gateway:v1
     ports:
       - "8080:8080"
     environment:
@@ -11,20 +12,28 @@ services:
     depends_on:
       - orders
       - stock
+    networks:
+      - app-net
 
   orders:
     build: ./orders
+    image: pedidos-veloz-orders:v1
     environment:
       - DATABASE_URL=postgres://postgres:postgres@db:5432/orders
     depends_on:
       - db
+    networks:
+      - app-net
 
   stock:
     build: ./stock
+    image: pedidos-veloz-stock:v1
     environment:
       - DATABASE_URL=postgres://postgres:postgres@db:5432/stock
     depends_on:
       - db
+    networks:
+      - app-net
 
   db:
     image: postgres:15
@@ -32,6 +41,11 @@ services:
       POSTGRES_PASSWORD: postgres
     volumes:
       - pgdata:/var/lib/postgresql/data
+    networks:
+      - app-net
 
 volumes:
   pgdata:
+
+networks:
+  app-net:

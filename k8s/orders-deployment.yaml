@@ -13,8 +13,10 @@ spec:
         app: orders
     spec:
       containers:
-      - name: orders
-        image: pedidos-veloz-orders:latest
-        imagePullPolicy: Never
-        ports:
-        - containerPort: 3000
+        - name: orders
+          image: pedidos-veloz-orders:v1
+          env:
+            - name: DATABASE_URL
+              value: postgres://postgres:postgres@postgres-service:5432/orders
+          ports:
+            - containerPort: 3000
