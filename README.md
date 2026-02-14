@@ -45,3 +45,6 @@ A pasta `terraform/` contém um esqueleto Terraform demonstrando como a infraest
 Logs são emitidos via stdout dos containers e coletados pelo Kubernetes.
 Métricas podem ser obtidas via Metrics Server.
 Tracing distribuído é proposto com OpenTelemetry + Jaeger.
+
+## Link YouTube
+## https://youtu.be/9ENztWzLFh4
